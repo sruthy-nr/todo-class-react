@@ -44,12 +44,12 @@ class TodoApp extends Component<{}, TodoAppState> {
     this.fetchData();
   }
 
-  componentDidUpdate(prevProps: any, prevState: TodoAppState) {
-    // Compare the 'todos' from previous state with current state
-    if (this.state.filterDate === prevState.filterDate) {
-      this.fetchData();
-    }
-  }
+  // componentDidUpdate(prevProps: any, prevState: TodoAppState) {
+  //   // Compare the 'todos' from previous state with current state
+  //   if (this.state.filterDate === prevState.filterDate) {
+  //     this.fetchData();
+  //   }
+  // }
 
   fetchData = async () => {
     try {
@@ -95,6 +95,7 @@ class TodoApp extends Component<{}, TodoAppState> {
       const response = await axios.post("http://localhost:5001/api", newTodo);
       console.log('New ToDo item created:', response.data);
       // this.setState({ todos: response.data, inputText: '' });//before db connection
+      this.fetchData();//other method componentDidUpdate
        this.setState({inputText:'',inputFromTime:'',inputToTime:''})
     } catch (error) {
       if (error instanceof Error) {
